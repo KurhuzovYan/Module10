@@ -18,10 +18,10 @@ public class InputStreamExample {
                 }
             }
 
-            String[] arrNum = new String(buffer).split("\n");
+            String[] arrNum = new String(buffer).split(System.lineSeparator());
 
             for (String number : arrNum) {
-                if (number.replaceAll("\r", "").matches("(\\(?\\d{3}\\)?[\\- ]?)[\\d\\-]{8}")) {
+                if (number.matches("(\\(?\\d{3}\\)?[\\- ]?)[\\d\\-]{8}")) {
                     result += number + "\n";
                 }
             }
