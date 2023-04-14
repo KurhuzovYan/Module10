@@ -15,17 +15,15 @@ public class CountOfWordsInFile {
                 }
             }
 
-            String[] arrWords = String.valueOf(buffer).replaceAll("[\n\r+]", " ").split(" ");
+            String[] arrWords = new String(buffer).replaceAll(" ", "\n").split(System.lineSeparator());
 
             Map<String, Integer> map = new HashMap<>();
 
             for (String i : arrWords) {
-                if (!i.equals("")) {
-                    if (map.containsKey(i)) {
-                        map.put(i, map.get(i) + 1);
-                    } else {
-                        map.put(i, 1);
-                    }
+                if (map.containsKey(i)) {
+                    map.put(i, map.get(i) + 1);
+                } else {
+                    map.put(i, 1);
                 }
             }
 

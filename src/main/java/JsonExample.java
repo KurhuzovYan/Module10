@@ -2,8 +2,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.Arrays;
+import java.util.*;
 
 public class JsonExample {
     public void createArrayFromFile() {
@@ -17,16 +16,17 @@ public class JsonExample {
                     buffer = Arrays.copyOf(buffer, c);
                 }
             }
-            String strBuf = String.valueOf(buffer).replaceAll("[\r\n]", " ");
-            String[] arrElem = strBuf.replaceAll("  ", " ").split(" ");
-            ArrayList<String> names = new ArrayList();
-            ArrayList<Integer> ages = new ArrayList();
+            String[] arrElem = new String(buffer).replaceAll(" ", "\n").split(System.lineSeparator());
+            List<String> names = new ArrayList();
+            List<Integer> ages = new ArrayList();
 
             for (String elem : arrElem) {
-                if ((elem.replaceAll("[a-zA-Z+]", "").length() == 0) && ((!elem.equals("name") && !elem.equals("age")))) {
-                    names.add(elem);
-                } else if (elem.matches("\\d+")) {
-                    ages.add(Integer.valueOf(elem));
+                if (!elem.equals("name") && !elem.equals("age")) {
+                    if (Character.isDigit(elem.charAt(0))) {
+                        ages.add(Integer.valueOf(elem));
+                    } else {
+                        names.add(elem);
+                    }
                 }
             }
 
